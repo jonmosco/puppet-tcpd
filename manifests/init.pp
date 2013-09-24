@@ -17,7 +17,7 @@
 # Jon Mosco <jonny.mosco@gmail.com>
 #
 class tcpd (
-  $default_allow = true,
+  $default_allow = undef,
   $default_deny  = undef,
   $allowed_hosts = undef,
   $denied_hosts  = undef,
@@ -30,8 +30,8 @@ class tcpd (
     $deny = 'ALL: ALL'
   }
 
-  validate_string($default_allow)
-  validate_string($default_deny)
+  #validate_bool($default_allow)
+  #validate_bool($default_deny)
 
   file { 'hosts.allow':
     ensure  => file,
