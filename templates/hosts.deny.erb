@@ -2,5 +2,8 @@
 <%= @deny %>
 <% end -%>
 <% if @denied_hosts -%>
-<%= @denied_hosts %>
+ALL: <%= @denied_hosts %>
+<% end -%>
+<% if @denied_domains -%>
+ALL: <%= @denied_domains %>
 <% end -%>

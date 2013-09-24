@@ -1,6 +1,15 @@
 <% if @allow -%>
 <%= @allow %>
 <% end -%>
+<% if @allowed_hosts && @denied_hosts -%>
+ALL: <%= @allowed_hosts.join(',') %> EXCEPT <%= @denied_hosts.join(',') %>
+<% end -%>
+<% if @allowed_domains && @denied_domains -%>
+ALL: <%= @allowed_domains.join(',')  %> EXCEPT <%= @denied_domains.join(',') %>
+<% end -%>
 <% if @allowed_hosts -%>
-<%= @allowed_hosts %>
+ALL: <%= @allowed_hosts.join(',')%>
+<% end -%>
+<% if @allowed_domains -%>
+ALL: <%= @allowed_domains.join(',') %>
 <% end -%>
