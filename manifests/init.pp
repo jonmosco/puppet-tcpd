@@ -2,6 +2,9 @@
 #
 # == Description
 #
+# TCP Wrappers, tcpd
+# Access control for internet services
+#
 # Access will be granted when a (daemon,client) pair matches an entry in
 # the /etc/hosts.allow file.
 #
@@ -11,6 +14,13 @@
 # Otherwise, access will be granted.
 #
 # == Parameters
+#
+# $default_allow
+# - Set default policy to allow all hosts
+#
+# $default_deny
+# - Set default policy to deny all hosts.  WARNING: This will lock everything
+#   out of the server and should be used with care.
 #
 # == Authors
 #
@@ -30,8 +40,8 @@ class tcpd (
     $deny = 'ALL: ALL'
   }
 
-  #validate_bool($default_allow)
-  #validate_bool($default_deny)
+  validate_string($allow)
+  validate_string($deny)
 
   file { 'hosts.allow':
     ensure  => file,
