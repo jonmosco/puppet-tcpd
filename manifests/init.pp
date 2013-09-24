@@ -17,17 +17,17 @@
 # Jon Mosco <jonny.mosco@gmail.com>
 #
 class tcpd (
-  $default_allow = undef,
+  $default_allow = true,
   $default_deny  = undef,
   $allowed_hosts = undef,
   $denied_hosts  = undef,
 ) {
 
-  if $default_allow == true {
-    $default_allow = 'ALL: ALL'
+  if $default_allow {
+    $allow = 'ALL: ALL'
   }
-  if $default_deny == true {
-    $default_deny = 'ALL: ALL'
+  if $default_deny {
+    $deny = 'ALL: ALL'
   }
 
   validate_string($default_allow)
