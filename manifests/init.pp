@@ -15,10 +15,12 @@
 #
 # == Parameters
 #
-# $default_allow
+# $default_policy
+#
+# Allow
 # - Set default policy to allow all hosts
 #
-# $default_deny
+# Deny
 # - Set default policy to deny all hosts.  WARNING: This will lock everything
 #   out of the server and should be used with care.
 #
@@ -27,19 +29,19 @@
 # Jon Mosco <jonny.mosco@gmail.com>
 #
 class tcpd (
-  $default_allow = undef,
-  $default_deny  = undef,
-  $allowed_hosts = undef,
-  $denied_hosts  = undef,
+  $default_policy = 'allow',
+  $allowed_hosts  = undef,
+  $denied_hosts   = undef,
 ) {
 
-  if $default_allow {
+  if $default_policy == 'allow' {
     $allow = 'ALL: ALL'
   }
-  if $default_deny {
+  elsif $default_policy == 'deny' {
     $deny = 'ALL: ALL'
   }
 
+  validate_re($default_policy, '^(allow|deny)$', "Valid values for \$default_policy are 'allow', 'deny'. Received ${default_policy}")
   validate_string($allow)
   validate_string($deny)
 
